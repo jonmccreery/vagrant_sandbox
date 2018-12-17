@@ -57,9 +57,11 @@ Vagrant.configure("2") do |config|
       if Vagrant::Util::Platform.windows? then
         nodeconfig.vm.synced_folder "./scripts", "/scripts"
         nodeconfig.vm.synced_folder "./files", "/files"
+        nodeconfig.vm.synced_folder "./repo", "/repo"
       else
         nodeconfig.vm.synced_folder "./scripts", "/scripts", type: "nfs"
         nodeconfig.vm.synced_folder "./files", "/files", type: "nfs"
+        nodeconfig.vm.synced_folder "./repo", "/repo", type: "nfs"
       end
 
       if node[:script]
