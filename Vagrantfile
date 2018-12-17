@@ -4,12 +4,30 @@ nodes = [
     :hostname  => 'dev-cent7',
     :ip        => '192.168.0.10',
     :boxfile   => 'centos/7',
-    :script    => 'data/config.sh',
+    :script    => 'scripts/config.sh',
+    :autostart => true,
+  },
+  {
+    :hostname  => 'oren',
+    :ip        => '192.168.0.50',
+    :boxfile   => 'centos/7',
+    :script    => 'scripts/config_oren.sh',
+    :autostart => true,
+    :port_map  => { 8080 => 5000 }
+  },
+  {
+    :hostname  => 'blank',
+    :ip        => '192.168.0.51',
+    :boxfile   => 'centos/7',
     :autostart => true,
   }
 ]
 
 Vagrant.configure("2") do |config|
+  # keep our insecure key.... it's a development box, and if security matters,
+  # something is profoundly incorrect with what you're doing.
+  config.ssh.insert_key = false
+
   nodes.each do |node|
     @autostart = node[:autostart] ||= false
 
@@ -36,7 +54,13 @@ Vagrant.configure("2") do |config|
         box.customize ["modifyvm", :id, "--natdnshostresolver1", "on"] # magic to make DNS work
       end
 
-      nodeconfig.vm.synced_folder "./data", "/data"
+      if Vagrant::Util::Platform.windows? then
+        nodeconfig.vm.synced_folder "./scripts", "/scripts"
+        nodeconfig.vm.synced_folder "./files", "/files"
+      else
+        nodeconfig.vm.synced_folder "./scripts", "/scripts", type: "nfs"
+        nodeconfig.vm.synced_folder "./files", "/files", type: "nfs"
+      end
 
       if node[:script]
         nodeconfig.vm.provision "shell" do |s|
