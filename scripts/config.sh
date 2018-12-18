@@ -2,7 +2,7 @@
 
 # stuff we want
 yum_packages=(epel-release gcc tmux git python2-pip python-devel ncurses-devel ctags)
-python_packages=('ipython>=5,<6' requests)
+python_packages=('ipython>=5,<6' requests pylint)
 
 for package in ${yum_packages[@]}; do
   yum install -y $package

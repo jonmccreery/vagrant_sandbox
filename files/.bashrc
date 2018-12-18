@@ -24,9 +24,6 @@ fi
 # RVM if RVM exists
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
-# rbenv if rbenv exists
-[[ -d ~/.rbenv ]] && export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"
-
 # ssh management
 if [ -f ~/.keychain/${HOSTNAME}-sh  ]; then
   source ~/.keychain/${HOSTNAME}-sh
