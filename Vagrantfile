@@ -16,6 +16,13 @@ nodes = [
     :port_map  => { 8080 => 5000 }
   },
   {
+    :hostname  => 'kali',
+    :ip        => '192.168.0.51',
+    :boxfile   => 'offensive-security/kali-linux',
+    :script    => 'scripts/config.sh',
+    :autostart => true,
+  },
+  {
     :hostname  => 'blank',
     :ip        => '192.168.0.51',
     :boxfile   => 'centos/7',
