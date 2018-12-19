@@ -26,7 +26,7 @@ cd ruby-build
 PREFIX=/usr/local ./install.sh
 
 # We need to compile vim to make YouCompleteMe happy
-vim_ver=$(vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
+vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
 if [[ $vim_ver -lt 8 ]]; then
   cd /tmp/build
   git clone https://github.com/vim/vim
