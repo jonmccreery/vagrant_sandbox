@@ -17,7 +17,6 @@ nodes = [
   },
   {
     :hostname  => 'kali',
-    :ip        => '192.168.0.51',
     :boxfile   => 'offensive-security/kali-linux',
     :script    => 'scripts/config.sh',
     :autostart => true,
@@ -43,7 +42,11 @@ Vagrant.configure("2") do |config|
 
       nodeconfig.vm.hostname = node[:hostname] + ".box"
 
-      nodeconfig.vm.network :private_network, ip: node[:ip]
+      if node[:ip]
+        nodeconfig.vm.network :private_network, ip: node[:ip]
+      else
+        nodeconfig.vm.network :private_network, type: "dhcp"
+      end
 
       if node[:port_map]
         node[:port_map].each do |hport, gport|
