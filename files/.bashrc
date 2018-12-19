@@ -21,6 +21,9 @@ if [ -x /usr/bin/vim ]; then
   alias vi='vim'
 fi
 
+# rbenv if rbenv exists
+[[ -d ~/.rbenv ]] && export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"
+
 # RVM if RVM exists
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 

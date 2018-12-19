@@ -15,9 +15,18 @@ done
 cp -R /files/. /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
 
+# create a build space
+mkdir /tmp/build
+
+# rbenv, because Ruby is hard enough
+su -l vagrant -c 'git clone https://github.com/rbenv/rbenv.git ~/.rbenv; echo export PATH="$HOME/.rbenv/bin:$PATH" >> ~/.bash_profile; ~/.rbenv/bin/rbenv init'
+cd /tmp/build
+git clone https://github.com/rbenv/ruby-build.git
+cd ruby-build
+PREFIX=/usr/local ./install.sh
+
 # We need to compile vim to make YouCompleteMe happy
-mkdir tmp
-cd tmp
+cd /tmp/build
 git clone https://github.com/vim/vim
 cd vim
 ./configure --with-features=huge \
@@ -27,9 +36,6 @@ cd vim
             --enable-cscope
 make
 make install
-cd ../..
-rm -rf tmp
-
 
 # YCM pre-reqs
 yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
@@ -40,3 +46,6 @@ scl enable devtoolset-6 bash
 
 # Install YCM in the context of our vagrant user
 su -l vagrant -c 'source /opt/rh/devtoolset-6/enable; cd /home/vagrant/.vim/bundle; git clone https://github.com/Valloric/YouCompleteMe.git; cd YouCompleteMe; git submodule update --init --recursive; ./install.py --all'
+
+# clean up after ourselves
+rm -rf /tmp/build
