@@ -16,6 +16,8 @@ for package in ${python_packages[@]}; do
   pip install $package
 done
 
+cd /repo
+
 safe_clone() {
   if [ ! -d $1 ]; then
     git clone  "https://jonathanm:${github_key}@github.doubleverify.com/jonathanm/${1}.git"
