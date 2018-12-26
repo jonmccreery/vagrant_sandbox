@@ -88,7 +88,9 @@ if ${use_color} ; then
     fi
   fi
 
-  PS1='\[\e[01;32m\]\u@\H\[\e[00m\]:\[\e[01;34m\]\w\[\e[33m\]$(__repo)\[\e[00m\]\$ '
+#  export PS1='\n\[\e${cwdcolor}\][$PWD]\n\[\e${usercolor}\][\u]\[\e${host_name}\][${SHORTNAME}]\[\e${inputcolor}\] $ '
+
+  export PS1='\[\e[01;37m\]\u@\H\[\e[00m\]:\[\e[;32;40m\]\w\[\e[31m\]$(__repo)\[\e[00m\]\$ '
 
   alias ls='ls --color=auto'
   alias grep='grep --colour=auto'
