@@ -5,6 +5,7 @@ yum_packages=(epel-release gcc tmux git python2-pip python-devel ncurses-devel c
 python_packages=('ipython>=5,<6' requests pylint ipython)
 repos=(vagrant oren)
 
+# TODO: THIS IS LIKE... REALLY REALLY INSECURE
 github_key='235297140b5e3cfa028119e0e459e5d0e88042d0'
 
 for package in ${yum_packages[@]}; do
@@ -15,8 +16,14 @@ for package in ${python_packages[@]}; do
   pip install $package
 done
 
+safe_clone() {
+  if [ ! -d $1 ]; then
+    git clone  "https://jonathanm:${github_key}@github.doubleverify.com/jonathanm/${1}.git"
+  fi
+}
+
 for repo in ${repos[@]}; do
-  git clone "https://jonathanm:235297140b5e3cfa028119e0e459e5d0e88042d0@github.doubleverify.com/jonathanm/${repo}.git"
+  safe_clone ${repo}
 done
 
 cp -R /files/. /home/vagrant
@@ -26,7 +33,7 @@ chown -R vagrant:vagrant /home/vagrant
 mkdir /tmp/build
 
 # rbenv, because Ruby is hard enough
-su -l vagrant -c 'git clone https://github.com/rbenv/rbenv.git ~/.rbenv; echo export PATH="$HOME/.rbenv/bin:$PATH" >> ~/.bash_profile; ~/.rbenv/bin/rbenv init'
+su -l vagrant -c 'if [ ! -d ~/.rbenv ]; then git clone https://github.com/rbenv/rbenv.git ~/.rbenv; echo export PATH="$HOME/.rbenv/bin:$PATH" >> ~/.bash_profile; ~/.rbenv/bin/rbenv init; fi'
 cd /tmp/build
 git clone https://github.com/rbenv/ruby-build.git
 cd ruby-build
