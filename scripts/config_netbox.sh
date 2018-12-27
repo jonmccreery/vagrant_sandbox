@@ -4,6 +4,8 @@ yum_packages=(
   epel-release
   tmux
   git
+  docker
+  docker-compose
   python2-pip
   python-devel
   ncurses-devel
