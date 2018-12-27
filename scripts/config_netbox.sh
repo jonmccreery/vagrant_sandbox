@@ -28,11 +28,15 @@ done
 
 echo 'StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
-git clone https://github.com/pitkley/docker-netbox.git
+if [ ! -d docker-netbox ]; then
+  git clone https://github.com/pitkley/docker-netbox.git
+fi
 
 cd docker-netbox
 
 cp /files/netbox/docker-compose.yml .
+
+systemctl start docker
 
 docker-compose run --rm netbox createsuperuser
 docker-compose up -d
