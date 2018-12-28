@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # stuff we want
-yum_packages=(epel-release gcc tmux git python2-pip python-devel ncurses-devel ctags)
+yum_packages=(epel-release python34-pip gcc tmux git python2-pip python-devel ncurses-devel ctags)
 python_packages=('ipython>=5,<6' requests pylint ipython)
+python3_packages=(pylint)
 repos=(vagrant oren)
 
 # TODO: THIS IS LIKE... REALLY REALLY INSECURE
@@ -14,6 +15,10 @@ done
 
 for package in ${python_packages[@]}; do
   pip install $package
+done
+
+for package in ${python3_packages[@]}; do
+  pip3 install $package
 done
 
 cd /repo
@@ -43,6 +48,7 @@ PREFIX=/usr/local ./install.sh
 
 # We need to compile vim to make YouCompleteMe happy
 vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
+
 if [[ $vim_ver -lt 8 ]]; then
   cd /tmp/build
   git clone https://github.com/vim/vim
@@ -58,13 +64,11 @@ fi
 
 # YCM pre-reqs
 yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
-
 yum install -y devtoolset-6
-
 scl enable devtoolset-6 bash
 
 # Install YCM in the context of our vagrant user
-su -l vagrant -c 'source /opt/rh/devtoolset-6/enable; cd /home/vagrant/.vim/bundle; git clone https://github.com/Valloric/YouCompleteMe.git; cd YouCompleteMe; git submodule update --init --recursive; ./install.py --all'
+su -l vagrant -c 'source /opt/rh/devtoolset-6/enable; cd /home/vagrant/.vim/bundle; if [ ! -d YouCompleteMe ]; then git clone https://github.com/Valloric/YouCompleteMe.git; cd YouCompleteMe; git submodule update --init --recursive; ./install.py --all; fi'
 
 # clean up after ourselves
 rm -rf /tmp/build
