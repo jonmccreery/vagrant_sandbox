@@ -14,7 +14,7 @@ set encoding=utf-8
 set number
 syntax on
 set background=dark
-colorscheme symfony
+colorscheme solarized
 
 " don't clutter things up
 set nobackup
@@ -35,10 +35,21 @@ autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeShowHidden=1
 let NERDTreeDirArrows=0
 
+let g:python_hightlight_all = 1
+
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " teach vim some highlightings
 augroup vagrant
