@@ -4,3 +4,5 @@ setlocal shiftwidth=4
 setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
+
+let g:ale_linters = ['pylint']
