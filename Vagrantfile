@@ -20,6 +20,14 @@ nodes = [
     :ip        => '192.168.0.51',
     :boxfile   => 'centos/7',
     :autostart => true,
+  },
+  {
+    :hostname  => 'netbox',
+    :ip        => '192.168.0.52',
+    :port_map  => { 8000 => 8000 },
+    :script    => 'scripts/config_netbox.sh',
+    :boxfile   => 'centos/7',
+    :autostart => true,
   }
 ]
 
