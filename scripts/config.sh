@@ -2,7 +2,7 @@
 
 # stuff we want
 yum_packages=(epel-release python34-pip gcc tmux git python2-pip python-devel ncurses-devel ctags)
-python_packages=('ipython>=5,<6' requests pylint ipython)
+python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython)
 python3_packages=(pylint)
 repos=(vagrant oren)
 
