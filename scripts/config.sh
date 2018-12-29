@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # stuff we want
-yum_packages=(epel-release python34-pip gcc tmux git python2-pip python-devel ncurses-devel ctags)
+yum_packages=(epel-release python34-pip gcc tmux htop git traceroute nc nmap python2-pip python-devel ncurses-devel ctags)
 python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython)
 python3_packages=(pylint)
 repos=(vagrant oren)
@@ -49,6 +49,7 @@ PREFIX=/usr/local ./install.sh
 # We need to compile vim to make YouCompleteMe happy
 vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
 
+# speed up 'vagrang provision' with a quick check
 if [[ $vim_ver -lt 8 ]]; then
   cd /tmp/build
   git clone https://github.com/vim/vim
