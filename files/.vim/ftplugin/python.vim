@@ -5,4 +5,4 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 
-let g:ale_linters = ['pylint']
+let g:ale_linters = { 'python': ['pycodestyle', 'flake8'], }
