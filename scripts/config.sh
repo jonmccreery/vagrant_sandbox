@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # stuff we want
-yum_packages=(epel-release python34-pip gcc tmux htop git traceroute nc nmap python2-pip python-devel ncurses-devel ctags)
+yum_packages=(epel-release python34-pip gcc tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags)
 python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython)
 python3_packages=(pylint)
 repos=(vagrant oren)
@@ -33,7 +33,7 @@ for repo in ${repos[@]}; do
   safe_clone ${repo}
 done
 
-cp -R /files/. /home/vagrant
+cp -R /files/dotfiles/ /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
 
 # create a build space
