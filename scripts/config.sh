@@ -33,7 +33,7 @@ for repo in ${repos[@]}; do
   safe_clone ${repo}
 done
 
-cp -R /files/dotfiles/ /home/vagrant
+cp -R /files/dotfiles/.* /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
 
 # create a build space
