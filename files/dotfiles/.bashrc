@@ -37,10 +37,12 @@ if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
 fi
 
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
+# TODO: These are the awesome, but too damn slow.  Figure
+# out what the fuck's happening here.
+#export GIT_PS1_SHOWDIRTYSTATE=true
+#export GIT_PS1_SHOWSTASHSTATE=true
+#export GIT_PS1_SHOWUNTRACKEDFILES=true
+#export GIT_PS1_SHOWUPSTREAM=true
 
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
