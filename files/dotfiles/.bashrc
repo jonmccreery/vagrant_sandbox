@@ -1,4 +1,5 @@
 WORKDIR=/srv/workspace
+
 export PATH=~/bin:$PATH
 
 # vi mode is cool
@@ -12,7 +13,6 @@ alias ll='ls -la'
 alias cw="cd $WORKDIR"
 alias gba="git branch -a"
 alias gca="git commit -a -m"
-alias vi='vim'
 
 # strip ansi escape sequences from an input stream
 alias stresc='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
@@ -36,6 +36,11 @@ unset SSH_ASKPASS
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
 fi
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
 
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
