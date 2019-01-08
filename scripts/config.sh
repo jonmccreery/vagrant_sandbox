@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # stuff we want
-yum_packages=(epel-release python34-pip gcc tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags)
+yum_packages=(epel-release python34-pip gcc tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags ShellCheck)
 python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython virtualenv)
 python3_packages=(pylint)
 repos=(vagrant oren)
