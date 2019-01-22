@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /vagerant/scripts/util.sh
+source /vagrant/scripts/util.sh
 
 # stuff we want
 yum_packages=(epel-release python34-pip gcc tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags ShellCheck)
