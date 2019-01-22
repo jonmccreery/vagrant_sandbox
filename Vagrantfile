@@ -32,7 +32,7 @@ nodes = [
     :autostart => true,
   },
   {
-    :hostname  => 'ip_scan',
+    :hostname  => 'ipscan',
     :ip        => '192.168.0.53',
     :script    => 'scripts/config_ipscan.sh',
     :boxfile   => 'centos/7',
