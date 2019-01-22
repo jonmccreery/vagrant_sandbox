@@ -22,7 +22,7 @@ clone_and_update_repos() {
   if [ -d /repo ]; then
     for repo in ${repos[@]}; do
       safe_clone ${repo}
-      reponame=$(echo ${repo} | sed -e 's/^.*\/\([^.]*)\..*$/\1/g')
+      reponame=$(echo ${repo} | sed -e 's/^.*\/\([^.]*\)\..*$/\1/g')
       cd ${reponame}
       git pull
       cd ..
@@ -42,7 +42,7 @@ install_vim_8() {
   vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
   
   #   speed up 'vagrang provision' with a quick check 
-  if   [[ $vim_ver -lt 8 ]]; then
+  if [[ $vim_ver -lt 8 ]]; then
       cd /tmp/build
       git clone https://github.com/vim/vim
       cd vim
@@ -57,11 +57,11 @@ install_vim_8() {
 } 
 
 install_YouCompleteMe() {
-  # YCM pre-reqs
-  yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
-  yum install -y devtoolset-6
-  scl enable devtoolset-6 bash
-  
-  # Install YCM in the context of our vagrant user
-  su -l vagrant -c 'source /opt/rh/devtoolset-6/enable; cd /home/vagrant/.vim/bundle; if [ ! -d YouCompleteMe ]; then git clone https://github.com/Valloric/YouCompleteMe.git; cd YouCompleteMe; git submodule update --init --recursive; ./install.py --all; fi' 
+# YCM pre-reqs
+yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
+yum install -y devtoolset-6
+scl enable devtoolset-6 bash
+
+# Install YCM in the context of our vagrant user
+su -l vagrant -c 'source /opt/rh/devtoolset-6/enable; cd /home/vagrant/.vim/bundle; if [ ! -d YouCompleteMe ]; then git clone https://github.com/Valloric/YouCompleteMe.git; cd YouCompleteMe; git submodule update --init --recursive; ./install.py --all; fi' 
 }
