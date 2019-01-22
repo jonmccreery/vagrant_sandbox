@@ -22,7 +22,7 @@ if [ -x /usr/local/bin/vim ]; then
 fi
 
 # rbenv if rbenv exists
-[[ -d ~/.rbenv ]] && export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"
+[[ -d ~/.rbenv ]] && (export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)")
 
 # RVM if RVM exists
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 

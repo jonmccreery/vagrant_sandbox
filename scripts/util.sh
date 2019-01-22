@@ -22,7 +22,7 @@ clone_and_update_repos() {
   if [ -d /repo ]; then
     for repo in ${repos[@]}; do
       safe_clone ${repo}
-      reponame=$(echo ${repo} | sed -e 's/^.*\/\([^.]*\)\..*$/\1/g')
+      reponame=$(echo "${repo}" | sed -e 's/^.*\/\([^.]*\)\..*$/\1/g')
       cd ${reponame}
       git pull
       cd ..
