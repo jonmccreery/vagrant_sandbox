@@ -17,12 +17,13 @@ chown -R vagrant:vagrant /home/vagrant
 # create a build space
 mkdir /tmp/build
 
-# clean up after ourselves
-rm -rf /tmp/build
-
 # main body
 install_packages
 clone_and_update_repos
 install_rbenv
 install_vim_8
 install_YouCompleteMe
+
+# clean up after ourselves
+rm -rf /tmp/build
+
