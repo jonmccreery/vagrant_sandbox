@@ -6,7 +6,7 @@ nodes = [
     :memory    => 2048,
     :ip        => '192.168.0.10',
     :boxfile   => 'centos/7',
-    :script    => 'scripts/config.sh',
+    :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
   {
@@ -28,6 +28,13 @@ nodes = [
     :ip        => '192.168.0.52',
     :port_map  => { 8000 => 8000 },
     :script    => 'scripts/config_netbox.sh',
+    :boxfile   => 'centos/7',
+    :autostart => true,
+  },
+  {
+    :hostname  => 'ip_scan',
+    :ip        => '192.168.0.53',
+    :script    => 'scripts/config_ipscan.sh',
     :boxfile   => 'centos/7',
     :autostart => true,
   }
