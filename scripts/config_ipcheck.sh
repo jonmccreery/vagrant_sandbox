@@ -21,4 +21,4 @@ clone_and_update_repos
 rm -rf /tmp/build
 
 #####
-ln -s /repo/Network/util/netbox/ipcheck/ip_scan.py /usr/local/bin/ip_scan.py
+ln -s /repo/Network/util/netbox/ipcheck/ipcheck.py /usr/local/bin/ipcheck.py
