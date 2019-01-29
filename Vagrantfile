@@ -61,8 +61,16 @@ Vagrant.configure("2") do |config|
         end
       end
 
+      cpus = 1
       memory = 1024
-      cpus   = 1
+
+      if node[:cpus]
+        cpus = node[:cpus]
+      end
+
+      if node[:memory]
+        memory = node[:memory]
+      end
 
       nodeconfig.vm.provider :virtualbox do |box|
         box.memory = memory
