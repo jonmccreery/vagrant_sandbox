@@ -43,7 +43,7 @@ nodes = [
     :ip        => '192.168.0.54',
     :boxfile   => 'ubuntu/trusty64',
     :autostart => true,
-  }<
+  },
   {
     :hostname  => 'dev-ubuntu16',
     :ip        => '192.168.0.54',
@@ -51,7 +51,7 @@ nodes = [
     :autostart => true,
   }
 ]
-]
+
 
 Vagrant.configure("2") do |config|
   # keep our insecure key.... it's a development box, and if security matters,
