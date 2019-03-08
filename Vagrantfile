@@ -39,11 +39,18 @@ nodes = [
     :autostart => true,
   },
   {
-    :hostname  => 'dev-ubuntu',
+    :hostname  => 'dev-ubuntu14',
     :ip        => '192.168.0.54',
     :boxfile   => 'ubuntu/trusty64',
     :autostart => true,
+  }<
+  {
+    :hostname  => 'dev-ubuntu16',
+    :ip        => '192.168.0.54',
+    :boxfile   => 'ubuntu/xenial64',
+    :autostart => true,
   }
+]
 ]
 
 Vagrant.configure("2") do |config|
