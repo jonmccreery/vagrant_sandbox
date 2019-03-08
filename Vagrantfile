@@ -37,6 +37,12 @@ nodes = [
     :script    => 'scripts/config_ipcheck.sh',
     :boxfile   => 'centos/7',
     :autostart => true,
+  },
+  {
+    :hostname  => 'dev-ubuntu',
+    :ip        => '192.168.0.54',
+    :boxfile   => 'ubuntu/trusty64',
+    :autostart => true,
   }
 ]
 
