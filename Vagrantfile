@@ -37,8 +37,21 @@ nodes = [
     :script    => 'scripts/config_ipcheck.sh',
     :boxfile   => 'centos/7',
     :autostart => true,
+  },
+  {
+    :hostname  => 'dev-ubuntu14',
+    :ip        => '192.168.0.54',
+    :boxfile   => 'ubuntu/trusty64',
+    :autostart => true,
+  },
+  {
+    :hostname  => 'dev-ubuntu16',
+    :ip        => '192.168.0.54',
+    :boxfile   => 'ubuntu/xenial64',
+    :autostart => true,
   }
 ]
+
 
 Vagrant.configure("2") do |config|
   # keep our insecure key.... it's a development box, and if security matters,
