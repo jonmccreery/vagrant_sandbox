@@ -1,5 +1,5 @@
 install_packages() {
-  for package in ${yum_packages[@]}; do
+  for package in "${yum_packages[@]}"; do
     yum install -y $package
   done
   
