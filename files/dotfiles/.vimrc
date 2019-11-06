@@ -20,6 +20,9 @@ colorscheme solarized
 set nobackup
 set noswapfile
 
+" but don't fold either
+set nofoldenable
+
 set iskeyword+=:
 
 " json support
