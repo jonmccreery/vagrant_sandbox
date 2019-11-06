@@ -3,10 +3,9 @@
 source /vagrant/scripts/util.sh
 
 # stuff we want
-yum_packages=(epel-release python34-pip gcc tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags ShellCheck)
+yum_packages=(epel-release python34-pip gcc gcc-c++ tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags ShellCheck)
 python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython virtualenv)
 python3_packages=(pylint)
-repos=(vagrant oren)
 
 # TODO: THIS IS LIKE... REALLY REALLY INSECURE
 github_key='235297140b5e3cfa028119e0e459e5d0e88042d0'

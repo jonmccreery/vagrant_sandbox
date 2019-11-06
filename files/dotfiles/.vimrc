@@ -33,7 +33,7 @@ au FileType puppet setl autoindent tabstop=2 expandtab shiftwidth=2 softtabstop=
 " fire up NERDTree if there's no file given on the command line
 autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeShowHidden=1
-let NERDTreeDirArrows=0
+let NERDTreeDirArrows=1
 
 let g:python_hightlight_all = 1
 
