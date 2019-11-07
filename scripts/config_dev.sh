@@ -10,7 +10,7 @@ python3_packages=(pylint)
 # TODO: THIS IS LIKE... REALLY REALLY INSECURE
 github_key='235297140b5e3cfa028119e0e459e5d0e88042d0'
 
-cp -R /files/dotfiles/.* /home/vagrant
+#cp -R /files/dotfiles/.* /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
 
 # create a build space
