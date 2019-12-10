@@ -4,15 +4,15 @@ BUILDDIR='build'
 
 install_packages() {
   for package in "${yum_packages[@]}"; do
-    yum install -y $package
+    yum install -y "$package"
   done
   
-  for package in ${python_packages[@]}; do
-    pip install $package
+  for package in "${python_packages[@]}"; do
+    pip install "$package"
   done
   
-  for package in ${python3_packages[@]}; do
-    pip3 install $package
+  for package in "${python3_packages[@]}"; do
+    pip3 install "$package"
   done
 }
 
@@ -26,15 +26,15 @@ clone_and_update_repos() {
   
   # FIX: THIS IS ALL A DIRTY HACK
 
-
   ##  ALL this misery has been caused because you're running as root, in /home/vagrant
   #   so when you add shit to '~' like host keys, they end up in the wrong place. fml
-  safe_clone() {
-    if [ ! -d $1 ]; then
-      #git clone  "https://jonathanm:${github_key}@github.doubleverify.com/jonathanm/${1}.git"
-      true
-    fi
-  }
+
+#  safe_clone() {
+#    if [ ! -d $1 ]; then
+#      #git clone  "https://jonathanm:${github_key}@github.doubleverify.com/jonathanm/${1}.git"
+#      true
+#    fi
+#  }
   
   mkdir $BUILDDIR
   chown vagrant:vagrant $BUILDDIR
@@ -45,32 +45,30 @@ clone_and_update_repos() {
   chown vagrant:vagrant handshake
   chmod 600 handshake
 
-  echo 'trying to fucking add github.com to my fucking key store.'
-  set -x
+#  echo 'trying to fucking add github.com to my fucking key store.'
+#  set -x
   mkdir -p /home/vagrant
 su vagrant <<'EOF'
   pwd
   chown vagrant:vagrant -R /home/vagrant/.ssh
-  # diag
-  id
   mkdir /home/vagrant/.ssh
   ssh-keyscan github.com >> /home/vagrant/.ssh/known_hosts
-  ssh-agent bash -c 'set -x; id; ssh-add handshake; git clone git@github.com:jonmccreery/profile.git'
+  ssh-agent bash -c 'ssh-add handshake; git clone git@github.com:jonmccreery/profile.git'
   cd profile
   ./deploy.sh
 EOF
-  set +x
+#  set +x
   # <------ LESS DIRTY FROM HERE
 
-  if [ -d /repo ]; then
-    for repo in ${repos[@]}; do
-      safe_clone ${repo}
-      reponame=$(echo "${repo}" | sed -e 's/^.*\/\([^.]*\)\..*$/\1/g')
-      cd ${reponame}
-      git pull
-      cd ..
-    done
-  fi
+#  if [ -d /repo ]; then
+#    for repo in ${repos[@]}; do
+#      safe_clone ${repo}
+#      reponame=$(echo "${repo}" | sed -e 's/^.*\/\([^.]*\)\..*$/\1/g')
+#      cd ${reponame}
+#      git pull
+#      cd ..
+#    done
+#  fi
 }
 
 install_rbenv() {
@@ -82,9 +80,9 @@ install_rbenv() {
 }
 
 install_vim_8() {
+  #   speed up 'vagrant provision' with a quick check 
   vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
   
-  #   speed up 'vagrang provision' with a quick check 
   if [[ $vim_ver -lt 8 ]]; then
       cd /tmp/build
       git clone https://github.com/vim/vim
@@ -100,7 +98,7 @@ install_vim_8() {
 } 
 
 install_YouCompleteMe() {
-# YCM pre-reqs
+  # YCM pre-reqs
   yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
   yum install -y devtoolset-6
   scl enable devtoolset-6 bash
@@ -118,5 +116,4 @@ git submodule update --init --recursive
 EOF
 
   su -l vagrant -c "${install_ycm_cmd}"
-
 }
