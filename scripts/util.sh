@@ -6,11 +6,11 @@ install_packages() {
   for package in "${yum_packages[@]}"; do
     yum install -y "$package"
   done
-  
+
   for package in "${python_packages[@]}"; do
     pip install "$package"
   done
-  
+
   for package in "${python3_packages[@]}"; do
     pip3 install "$package"
   done
@@ -23,7 +23,7 @@ clone_and_update_repos() {
   echo "key_path=${NOTHINGHERE}"
   echo "builddir=${BUILDDIR}"
   echo "ip=$(ip address)"
-  
+
   # FIX: THIS IS ALL A DIRTY HACK
 
   ##  ALL this misery has been caused because you're running as root, in /home/vagrant
@@ -35,7 +35,7 @@ clone_and_update_repos() {
 #      true
 #    fi
 #  }
-  
+
   mkdir $BUILDDIR
   chown vagrant:vagrant $BUILDDIR
   cd $BUILDDIR
@@ -82,20 +82,24 @@ install_rbenv() {
 install_vim_8() {
   #   speed up 'vagrant provision' with a quick check 
   vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
-  
+
   if [[ $vim_ver -lt 8 ]]; then
       cd /tmp/build
       git clone https://github.com/vim/vim
       cd vim
+      #  with-features=huge      set most optional stuff to enabled
+      #  enable-multibyte        unicode ftw
+      #  enable-pythoninterp     hell yes
+      #  enable-cscope           for tags
       ./configure --with-features=huge \
                   --enable-multibyte \
-                  --enable-pythoninterp=yes \
+                  --enable-pythoninterp \
                   --with-python-config-dir=/lib64/python2.7/config \
                   --enable-cscope
       make
       make install
-  fi  
-} 
+  fi
+}
 
 install_YouCompleteMe() {
   # YCM pre-reqs
