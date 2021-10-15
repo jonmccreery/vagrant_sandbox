@@ -3,17 +3,30 @@ NOTHINGHERE='/files/handshake.tgz'
 BUILDDIR='build'
 
 install_packages() {
+  #yum update -y
+
   for package in "${yum_packages[@]}"; do
     yum install -y "$package"
   done
 
+  alternatives --set python /usr/bin/python3
+
+  python --version
+  pip3 --version
+
   for package in "${python_packages[@]}"; do
-    pip install "$package"
+    pip install --upgrade "$package"
   done
 
   for package in "${python3_packages[@]}"; do
-    pip3 install "$package"
+    pip3 install --upgrade "$package"
   done
+  # ShellCheck by hand
+  sc_url="https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz"
+
+  curl -LJO "$sc_url" > sc.txz
+  tar xvJf sc.txz
+  cp shellcheck-stable/shellcheck /usr/local/bin
 }
 
 clone_and_update_repos() {
@@ -81,7 +94,9 @@ install_rbenv() {
 
 install_vim_8() {
   #   speed up 'vagrant provision' with a quick check 
-  vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
+  if [ -f /usr/local/bin/vim ]; then
+    vim_ver=$(/usr/local/bin/vim --version | grep 'VIM - .*[0-9]\.[0-9]' | sed 's/^[^0-9]*\([0-9]\)\..*$/\1/')
+  fi
 
   if [[ $vim_ver -lt 8 ]]; then
       cd /tmp/build
@@ -93,7 +108,7 @@ install_vim_8() {
       #  enable-cscope           for tags
       ./configure --with-features=huge \
                   --enable-multibyte \
-                  --enable-pythoninterp \
+                  --enable-python3interp \
                   --with-python-config-dir=/lib64/python2.7/config \
                   --enable-cscope
       make
@@ -103,7 +118,7 @@ install_vim_8() {
 
 install_YouCompleteMe() {
   # YCM pre-reqs
-  yum install -y xbuild go tsserver node npm cargo cmake centos-release-scl
+  yum install -y libarchive go nodejs npm cargo cmake 
   yum install -y devtoolset-6
   scl enable devtoolset-6 bash
 

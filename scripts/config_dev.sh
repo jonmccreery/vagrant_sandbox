@@ -3,9 +3,8 @@
 source /vagrant/scripts/util.sh
 
 # stuff we want
-yum_packages=(epel-release python34-pip gcc gcc-c++ tmux htop tig git traceroute nc nmap python2-pip python-devel ncurses-devel ctags ShellCheck)
-python_packages=('ipython>=5,<6' requests flake8 pycodestyle pylint ipython virtualenv)
-python3_packages=(pylint)
+yum_packages=(epel-release python36 python3-pip python36-devel java-11-openjdk gcc gcc-c++ make autoconf cmake wget tmux htop tig git traceroute nc nmap ncurses-devel ctags zlib-devel libffi-devel openssl-devel)
+python3_packages=(pip ipython requests flake8 pycodestyle pylint ipython virtualenv pylint)
 
 # TODO: THIS IS LIKE... REALLY REALLY INSECURE
 github_key='235297140b5e3cfa028119e0e459e5d0e88042d0'

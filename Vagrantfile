@@ -1,11 +1,11 @@
 nodes = [
   # here be the box definitions
   {
-    :hostname  => 'dev-cent7',
+    :hostname  => 'dev-cent8',
     :cpus      => 3,
     :memory    => 2048,
     :ip        => '192.168.0.10',
-    :boxfile   => 'centos/7',
+    :boxfile   => 'centos/8',
     :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
