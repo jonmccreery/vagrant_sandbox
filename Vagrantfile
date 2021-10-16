@@ -5,7 +5,7 @@ nodes = [
     :cpus      => 3,
     :memory    => 2048,
     :ip        => '192.168.0.10',
-    :boxfile   => 'centos/8',
+    :boxfile   => 'mgv/centos-8-vbguest',
     :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
@@ -69,6 +69,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define node[:hostname], autostart: @autostart do |nodeconfig|
       nodeconfig.vm.box = node[:boxfile]
+      nodeconfig.vbguest.installer_hooks[:before_install] = ["dnf install -y https://people.centos.org/arrfab/shim/results.c8/kernel/20190604090648/4.18.0-80.el8.x86_64/kernel-devel-4.18.0-80.el8.x86_64.rpm", "sleep 1"]
 
       nodeconfig.vm.hostname = node[:hostname] + ".box"
 
