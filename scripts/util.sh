@@ -131,7 +131,7 @@ rm -rf YouCompleteMe
 git clone https://github.com/Valloric/YouCompleteMe.git
 cd YouCompleteMe
 git submodule update --init --recursive
-./install.py --all
+EXTRA_CMAKE_ARGS=-DEXTERNAL_LIBCLANG_PATH=/usr/lib64/libclang.so ./install.py --system-libclang --clang-completer --go-completer --java-completer --rust-completer --ts-completer
 EOF
 
   su -l vagrant -c "${install_ycm_cmd}"

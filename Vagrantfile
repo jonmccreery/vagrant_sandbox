@@ -6,6 +6,7 @@ nodes = [
     :memory    => 2048,
     :ip        => '192.168.0.10',
     :boxfile   => 'mgv/centos-8-vbguest',
+    #:boxfile   => 'centos/8',
     :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
