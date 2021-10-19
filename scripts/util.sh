@@ -109,7 +109,7 @@ install_vim_8() {
       ./configure --with-features=huge \
                   --enable-multibyte \
                   --enable-python3interp \
-                  --with-python-config-dir=/lib64/python2.7/config \
+                  --with-python-config-dir=/lib64/python3.6/config \
                   --enable-cscope
       make
       make install
@@ -119,8 +119,7 @@ install_vim_8() {
 install_YouCompleteMe() {
   # YCM pre-reqs
   yum install -y libarchive go nodejs npm cargo cmake 
-  yum install -y devtoolset-6
-  scl enable devtoolset-6 bash
+  dnf group install -y "Development Tools"
 
   # Install YCM in the context of our vagrant user
   read -r -d '' install_ycm_cmd  <<-'EOF'
