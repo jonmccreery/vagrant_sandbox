@@ -5,51 +5,23 @@ nodes = [
     :cpus      => 3,
     :memory    => 2048,
     :ip        => '192.168.0.10',
-    :boxfile   => 'morlock/dev-cent8',
+    :boxfile   => 'roboxes/rocky8',
+    #:boxfile   => 'morlock/dev-cent8',
     #:boxfile   => 'mgv/centos-8-vbguest',
     #:boxfile   => 'centos/8',
     :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
   {
-    :hostname  => 'oren',
-    :ip        => '192.168.0.50',
-    :boxfile   => 'centos/7',
-    :script    => 'scripts/config_oren.sh',
-    :autostart => true,
-    :port_map  => { 8080 => 5000 }
-  },
-  {
     :hostname  => 'kali',
     :boxfile   => 'offensive-security/kali-linux',
-    :script    => 'scripts/config.sh',
+    :script    => 'scripts/config_dev.sh',
     :autostart => true,
   },
   {
     :hostname  => 'blank',
     :ip        => '192.168.0.51',
-    :boxfile   => 'morlock/test',
-    :autostart => true,
-  },
-  {
-    :hostname  => 'netbox',
-    :ip        => '192.168.0.52',
-    :port_map  => { 8000 => 8000 },
-    :script    => 'scripts/config_netbox.sh',
-    :boxfile   => 'centos/7',
-    :autostart => true,
-  },
-  {
-    :hostname  => 'ipcheck',
-    :ip        => '192.168.0.53',
-    :script    => 'scripts/config_ipcheck.sh',
-    :boxfile   => 'centos/7',
-    :autostart => true,
-  },
-  {
-    :hostname  => 'dev-ubuntu14',
-    :ip        => '192.168.0.54',
-    :boxfile   => 'ubuntu/trusty64',
+    :boxfile   => 'morlock/dev-cent8',
     :autostart => true,
   },
   {
@@ -64,7 +36,6 @@ nodes = [
 Vagrant.configure("2") do |config|
   # keep our insecure key.... it's a development box, and if security matters,
   # something is profoundly incorrect with what you're doing.
-  # config.ssh.password = "vagrant"
   config.ssh.insert_key = false
 
   nodes.each do |node|
@@ -72,7 +43,6 @@ Vagrant.configure("2") do |config|
 
     config.vm.define node[:hostname], autostart: @autostart do |nodeconfig|
       nodeconfig.vm.box = node[:boxfile]
-      nodeconfig.vbguest.installer_hooks[:before_install] = ["dnf install -y https://people.centos.org/arrfab/shim/results.c8/kernel/20190604090648/4.18.0-80.el8.x86_64/kernel-devel-4.18.0-80.el8.x86_64.rpm", "sleep 1"]
 
       nodeconfig.vm.hostname = node[:hostname] + ".box"
 

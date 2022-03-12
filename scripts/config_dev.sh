@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /vagrant/scripts/util.sh
+source /scripts/util.sh
 
 # stuff we want
 yum_packages=(epel-release python36 python3-pip python36-devel java-11-openjdk gcc gcc-c++ make autoconf cmake wget tmux htop tig git traceroute nc nmap ncurses-devel ctags zlib-devel libffi-devel openssl-devel mlocate clang)
