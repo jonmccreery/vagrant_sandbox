@@ -5,7 +5,8 @@ nodes = [
     :cpus      => 3,
     :memory    => 2048,
     :ip        => '192.168.0.10',
-    :boxfile   => 'mgv/centos-8-vbguest',
+    :boxfile   => 'morlock/dev-cent8',
+    #:boxfile   => 'mgv/centos-8-vbguest',
     #:boxfile   => 'centos/8',
     :script    => 'scripts/config_dev.sh',
     :autostart => true,
@@ -27,7 +28,7 @@ nodes = [
   {
     :hostname  => 'blank',
     :ip        => '192.168.0.51',
-    :boxfile   => 'centos/7',
+    :boxfile   => 'morlock/test',
     :autostart => true,
   },
   {
@@ -63,6 +64,7 @@ nodes = [
 Vagrant.configure("2") do |config|
   # keep our insecure key.... it's a development box, and if security matters,
   # something is profoundly incorrect with what you're doing.
+  # config.ssh.password = "vagrant"
   config.ssh.insert_key = false
 
   nodes.each do |node|
