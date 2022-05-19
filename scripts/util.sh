@@ -127,7 +127,7 @@ source /opt/rh/devtoolset-6/enable
 cd /home/vagrant/.vim/bundle
 
 rm -rf YouCompleteMe
-git clone https://github.com/Valloric/YouCompleteMe.git
+git clone https://github.com/ycm-core/YouCompleteMe.git
 cd YouCompleteMe
 git submodule update --init --recursive
 EXTRA_CMAKE_ARGS=-DEXTERNAL_LIBCLANG_PATH=/usr/lib64/libclang.so ./install.py --system-libclang --clang-completer --go-completer --java-completer --rust-completer --ts-completer
